@@ -1,11 +1,21 @@
 import React, {Component } from 'react';
+import Star from './../star/star';
+import { connect } from "react-redux";
 
 
 class SolarSystem extends Component {
 
     render() {
-        return <div className="container bg-dark" style={{"height" : "600px", "width" : "800px"}}></div>
+        var stars_config = this.props.starsReducer;
+        return <svg className="container bg-dark" style={{"height" : "600px", "width" : "800px"}}>{stars_config.map((star, index) => {
+            return <Star key={index} config={star}></Star>
+        }
+        )}</svg>
     }
 }
 
-export default SolarSystem;
+const mapStateToProps = state => {
+    return state;
+}
+
+export default connect(mapStateToProps)(SolarSystem);
