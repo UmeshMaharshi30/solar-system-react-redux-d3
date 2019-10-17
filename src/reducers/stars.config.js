@@ -3,10 +3,11 @@ const starsReducer = (state = null, action) => {
     switch(action.type) {
         default:
             var total_stars = [];
-            for(let i = 0; i < 40; i++) {
+            for(let i = 0; i < 60; i++) {
                 var star_config = {
                     location : [Math.random() * 780 + 20, Math.random() * 780 + 20],
                     size : 1,
+                    blink : Math.random() > 0.75 ? true : false,
                     color : "white"
                 };
                 total_stars.push(star_config);

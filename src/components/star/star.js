@@ -24,6 +24,7 @@ class Star extends Component {
         let el = d3.select(this.starRef.current);
         var comp_ref = this;
         //this.repeat(el);
+        if(!this.state.config.config.blink) return;
         el.attr("r", 0.2).transition()
         .duration(1600)
         .attr("r", this.state.config.config.size)
