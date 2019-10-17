@@ -47,7 +47,7 @@ class Star extends Component {
         var size = star_properties.size;
         var color = star_properties.color ? star_properties.color : "white";
 
-        return <circle cx={center_x} r ={2} cy={center_y} fill={color} ref={this.starRef} ></circle>
+        return <circle cx={center_x} r ={size} cy={center_y} fill={color} ref={this.starRef} ></circle>
     }
 }
 
