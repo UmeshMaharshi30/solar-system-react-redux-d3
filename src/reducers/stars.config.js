@@ -6,7 +6,7 @@ const starsReducer = (state = null, action) => {
             for(let i = 0; i < 40; i++) {
                 var star_config = {
                     location : [Math.random() * 800, Math.random() * 800],
-                    size : 2,
+                    size : 1,
                     color : "white"
                 };
                 total_stars.push(star_config);

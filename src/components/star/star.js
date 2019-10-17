@@ -7,51 +7,47 @@ class Star extends Component {
 
     constructor(props) {
         super();
-        var star_config = {
-            location : [0, 0],
-            size : 2,
-            color : "white"
-        };
         this.state = {
-          config: star_config
+          config: props
         };
     }
 
     starRef = React.createRef();
 
     componentDidMount() {
-        var star_config = {
-            location : [0, 0],
-            size : 2,
-            color : "white"
-        };
         this.setState({
-          config: star_config
+          config: this.props
         });
     }
 
-    componentDidUpdate() {
+    componentDidUpdate() {        
         let el = d3.select(this.starRef.current);
-        el.transition()
-            .duration(800)
-            .ease(d3.easeBounceOut)
-            .attr("cx", this.props.config.location[0])
-            .attr("cy", this.props.config.location[1])
-            .on("end", () =>
-                this.setState({
-                config: this.props.config.location
-            })
-        );
+        var comp_ref = this;
+        //this.repeat(el);
+        el.attr("r", 0.2).transition()
+        .duration(1600)
+        .attr("r", this.state.config.config.size)
+        .transition()
+        .attr("r", 0.2)
+        .on("end", function() {
+            comp_ref.setState({...this.state});
+        });
+    }
+
+    repeat(star_reference) {
+        star_reference.attr("r", 2).transition()
+        .duration(1600)
+        .attr("r", 5);
     }
 
     render() {
-        var star_properties = this.state.config;
-        var center_x = star_properties[0];
-        var center_y = star_properties[1];
-        var size = this.props.size;
-        var color = this.props.color ? star_properties.color : "white";
+        var star_properties = this.state.config.config;
+        var center_x = star_properties.location[0];
+        var center_y = star_properties.location[1];
+        var size = star_properties.size;
+        var color = star_properties.color ? star_properties.color : "white";
 
-        return <circle cx={center_x} r ={2} cy={center_y} fill={color} ref={this.starRef}></circle>
+        return <circle cx={center_x} r ={2} cy={center_y} fill={color} ref={this.starRef} ></circle>
     }
 }
 
