@@ -32,7 +32,7 @@ class Planet extends Component {
         var trajectory = el.select('path');
             trajectory.attr("d", arc());
         var planet_body = el.select('circle');
-            planet_body.attr("cx", this.props.config.distance).attr("cy", this.props.config.distance).attr("angle", 0);
+            planet_body.attr("cx", radius*Math.cos(Math.PI * 2 *Math.random())).attr("cy", radius*Math.sin(Math.PI * 2 *Math.random())).attr("angle", 0);
 
             planet_body.transition().duration(this.props.config.revolution_time).ease(d3.easeLinear)
                         .attrTween("cx", function() {
@@ -56,7 +56,8 @@ class Planet extends Component {
         var revolution_time = planet_properties.revolution_time;
         var rotation_time = planet_properties.rotation_time;
         var color = planet_properties.color;
-        return <g ref={this.planetRef} transform="translate(400,300)"><path fill={color} style={{"opacity" : 0.3}}></path><circle cx={distance_from_sun} r={5} cy={distance_from_sun} fill={color} ></circle></g>
+        var radius = this.props.config.distance * Math.SQRT2;
+        return <g ref={this.planetRef} transform="translate(400,300)"><path fill={color} style={{"opacity" : 0.3}}></path><circle cx={radius*Math.cos(Math.PI * 2 *Math.random())} r={planet_size} cy={radius*Math.sin(Math.PI * 2 *Math.random())} fill={color} ></circle></g>
         
     }
 }
