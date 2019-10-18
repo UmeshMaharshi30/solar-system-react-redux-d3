@@ -16,7 +16,8 @@ class Star extends Component {
 
     componentDidMount() {
         this.setState({
-          config: this.props
+          config: this.props,
+          delay : Math.random() * 1000
         });
     }
 
@@ -25,7 +26,7 @@ class Star extends Component {
         var comp_ref = this;
         //this.repeat(el);
         if(!this.state.config.config.blink) return;
-        el.attr("r", 0.2).transition()
+        el.attr("r", 0.2).transition().delay(this.state.delay)
         .duration(1600)
         .attr("r", this.state.config.config.size)
         .transition()
