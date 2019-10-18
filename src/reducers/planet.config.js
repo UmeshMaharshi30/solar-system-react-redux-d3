@@ -1,14 +1,15 @@
 import * as d3 from 'd3';
 import {solar_system_config} from './../constants/index';
 
-var planet_size_scale = d3.scaleLinear()
+export const planet_size_scale = d3.scaleLinear()
                             .domain([0, 12])
                             .range([1, 6]);
 
-var planet_distance_scale = d3.scalePow()
+export const planet_distance_scale = d3.scalePow()
                             .domain([0, 40])
-                            .range([40, 300/Math.SQRT2]);  
-var planet_revolution_scale = d3.scaleLinear()
+                            .range([40, 350/Math.SQRT2]);  
+
+export const planet_revolution_scale = d3.scaleLinear()
                         .domain([0.2, 250])
                         .range([3500, 16000]);  
 
