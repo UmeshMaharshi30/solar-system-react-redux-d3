@@ -41,8 +41,14 @@ class Sun extends Component {
         var center_y = sun_properties.location[1];
         var size = sun_properties.size;
         var color = sun_properties.color ? sun_properties.color : "orange";
-        return <g><circle id="sunBurst" cx={center_x} r={size} cy={center_y} fill="#FDB813" ref={this.starRef} style={{"opacity" : 0.4}} ></circle>
-        <circle cx={center_x} r={size} cy={center_y} fill={color} ref={this.starRef} style={{"opacity" : 0.5}} ></circle></g>
+        return <g>
+            <defs>
+                <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop offset="0%" style={{stopColor: "FFFF66", stopOpacity:1}}/>
+                    <stop offset="100%" style={{stopColor:"FF9900", stopOpacity:1}} />
+                </radialGradient>
+            </defs>
+        <circle id="sunBurst" cx={center_x} r={size} cy={center_y} fill="url(#grad1)" ref={this.starRef} ></circle></g>
         
     }
 }

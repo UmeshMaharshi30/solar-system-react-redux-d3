@@ -34,8 +34,9 @@ class Planet extends Component {
         var trajectory = el.select('path');
             trajectory.attr("d", arc());
         var planet_body = el.select('circle');
-        var direction = this.props.config.rotation_direction === true ? -1 : 1;
-            planet_body.transition().duration(this.props.config.revolution_time).ease(d3.easeCubic)
+        var direction = this.props.config.rotation_direction === true ? 1 : -1;
+            
+            planet_body.transition().duration(this.props.config.revolution_time).ease(d3.easeLinear)
                         .attrTween("cx", function() {
                             return function(t) {
                                 return x_radius*Math.cos(direction* ((Math.PI * 2 *t) + plant_ref.state.start_angle));
@@ -62,7 +63,7 @@ class Planet extends Component {
         var color = planet_properties.color;
         var x_translate = 20 * planet_properties.revolution_direction;
         var radius = this.props.config.distance * Math.SQRT2;
-        return <g ref={this.planetRef} transform={"translate(" + (400 + x_translate) + ",300)"}><ellipse rx={rx} ry={ry} fill="none" strokeWidth="2" style={{"opacity" : 0.3, "stroke" : color}}></ellipse><circle cx={rx*Math.cos(start_ang)} r={planet_size} cy={ry*Math.sin(start_ang)} fill={color} ></circle>
+        return <g ref={this.planetRef} transform={"translate(" + (400 + x_translate) + ",300)"}><ellipse rx={rx} ry={ry} fill="none" strokeWidth="2" style={{"opacity" : 0, "stroke" : color}}></ellipse><circle cx={rx*Math.cos(start_ang)} r={planet_size} cy={ry*Math.sin(start_ang)} fill={color} ></circle>
         </g>
         
     }
