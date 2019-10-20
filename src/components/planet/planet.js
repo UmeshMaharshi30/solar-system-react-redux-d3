@@ -39,12 +39,12 @@ class Planet extends Component {
             planet_body.transition().duration(this.props.config.revolution_time).ease(d3.easeLinear)
                         .attrTween("cx", function() {
                             return function(t) {
-                                return x_radius*Math.cos(direction* ((Math.PI * 2 *t) + plant_ref.state.start_angle));
+                                return x_radius*Math.cos(((Math.PI * 2 * t) + plant_ref.state.start_angle));
                             };
                         })
                         .attrTween("cy", function() {
                             return function(t) {
-                                return y_radius*Math.sin(direction * ((Math.PI * 2 *t) + plant_ref.state.start_angle));
+                                return y_radius*Math.sin(((Math.PI  * 2 * t) + plant_ref.state.start_angle));
                             };
                         }).on("end", function() {
                             plant_ref.setState({...this.state});
@@ -53,6 +53,7 @@ class Planet extends Component {
 
     render() {
         var planet_properties = this.state.config.config;
+        var planet_name = planet_properties.name;
         var distance_from_sun = planet_properties.distance;
         var rx = (1.1)*distance_from_sun;
         var ry = (0.8)*distance_from_sun;
@@ -60,10 +61,18 @@ class Planet extends Component {
         var planet_size = planet_properties.size;
         var revolution_time = planet_properties.revolution_time;
         var rotation_time = planet_properties.rotation_time;
-        var color = planet_properties.color;
+        var color = planet_properties.color[0];
+        var colors = planet_properties.color;
         var x_translate = 20 * planet_properties.revolution_direction;
         var radius = this.props.config.distance * Math.SQRT2;
-        return <g ref={this.planetRef} transform={"translate(" + (400 + x_translate) + ",300)"}><ellipse rx={rx} ry={ry} fill="none" strokeWidth="2" style={{"opacity" : 0, "stroke" : color}}></ellipse><circle cx={rx*Math.cos(start_ang)} r={planet_size} cy={ry*Math.sin(start_ang)} fill={color} ></circle>
+        return <g ref={this.planetRef} transform={"translate(" + (400 + x_translate) + ",300)"}>
+            <defs>
+                <linearGradient  id={planet_name} gradientTransform="rotate(90)">
+                    <stop offset="5%" style={{stopColor: colors[0]}}/>
+                    <stop offset="95%" style={{stopColor :colors[1]}} />
+                </linearGradient >
+            </defs>
+            <ellipse rx={rx} ry={ry} fill="none" strokeWidth="0.5" style={{"opacity" : 0, "stroke" : color}}></ellipse><circle cx={rx*Math.cos(start_ang)} r={planet_size} cy={ry*Math.sin(start_ang)} fill={"url(#" + planet_name + ")"} ></circle>
         </g>
         
     }
