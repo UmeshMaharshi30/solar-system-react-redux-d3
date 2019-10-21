@@ -11,12 +11,11 @@ export const planet_distance_scale = d3.scalePow()
 
 export const planet_revolution_scale = d3.scaleLinear()
                         .domain([0.2, 250])
-                        .range([5000, 50000]);  
+                        .range([5000, 100000]);  
 
 const planetsReducer = (state = null, action) => {
     switch(action.type) {
-        default:
-            var total_planets = [];            
+        default:      
             var planets = [{"name" : "Mercury","color" : ["gray", "brown"], "rotation_time" :2000},
             {"name" : "Venus", "color" : ["LightYellow", "gold"], "rotation_time" :2000},
             {"name" : "Earth",  "color" : ["blue", "white"], "rotation_time" :2000},
